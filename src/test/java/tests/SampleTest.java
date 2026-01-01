@@ -10,6 +10,6 @@ public class SampleTest extends BaseTest {
         page.navigate("https://example.com");
         String title = page.title();
         System.out.println("Page Title: " + title);
-        Assert.assertTrue(title.contains("Example Domain"));
+        Assert.assertTrue(title.contains("Example Domain test"));
     }
 }
