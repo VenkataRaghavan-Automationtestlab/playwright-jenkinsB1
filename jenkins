@@ -1,0 +1,35 @@
+pipeline {
+    agent any
+
+    tools {
+        maven 'Maven'
+        jdk 'JDK17'
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                checkout scm
+            }
+        }
+
+        stage('Install Browsers') {
+            steps {
+                bat 'mvn playwright:install'
+            }
+        }
+
+        stage('Run Tests') {
+            steps {
+                bat 'mvn clean test'
+            }
+        }
+
+        stage('Archive Results') {
+            steps {
+                junit 'target/surefire-reports/*.xml'
+                archiveArtifacts artifacts: 'target/**/*.html', fingerprint: true
+            }
+        }
+    }
+}
