@@ -33,3 +33,16 @@ pipeline {
         }
     }
 }
+
+post {
+    always {
+        publishHTML(target: [
+            allowMissing: true,
+            keepAll: true,
+            reportDir: 'reports',
+            reportFiles: 'ExtentReport.html',
+            reportName: 'Extent HTML Report'
+        ])
+    }
+}
+
